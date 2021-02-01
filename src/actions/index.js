@@ -1,4 +1,4 @@
-import getMovies from '../helpers/getMovies';
+import getMoviesByCategory from '../helpers/getMoviesByCategory';
 
 export const FETCH_MOVIES_BEGIN = 'FETCH_MOVIES_BEGIN';
 export const FETCH_MOVIES_SUCCESS = 'FETCH_MOVIES_SUCCESS';
@@ -18,15 +18,14 @@ const fetchMoviesError = error => ({
   payload: { error },
 });
 
-const fetchMovies = (category, page) => dispatch => {
+const fetchMoviesByCategory = (category, page) => dispatch => {
   dispatch(fetchMoviesBegin());
-  return getMovies(category, page)
+  return getMoviesByCategory(category, page)
     .then(res => {
-      console.log('results', res);
       dispatch(fetchMoviesSuccess(res.data));
       return res.data;
     })
     .catch(err => dispatch(fetchMoviesError(err)));
 };
 
-export default fetchMovies;
+export default fetchMoviesByCategory;

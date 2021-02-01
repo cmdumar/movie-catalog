@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Pagination from 'rc-pagination';
-import fetchMovies from '../actions/index';
+import fetchMoviesByCategory from '../actions/index';
 import Movies from './Movies';
 
 const Home = ({
@@ -11,7 +11,7 @@ const Home = ({
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    dispatch(fetchMovies('popular', page));
+    dispatch(fetchMoviesByCategory('popular', page));
   }, [page]);
 
   const changePage = e => {
@@ -31,5 +31,18 @@ const mapStateToProps = state => ({
   loading: state.movies.loading,
   error: state.movies.error,
 });
+
+Home.propTypes = {
+  error: PropTypes.string,
+  loading: PropTypes.bool,
+  movies: PropTypes.instanceOf(Object),
+  dispatch: PropTypes.func.isRequired,
+};
+
+Home.defaultProps = {
+  error: null,
+  loading: false,
+  movies: null,
+};
 
 export default connect(mapStateToProps, null)(Home);
