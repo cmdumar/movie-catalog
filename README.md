@@ -29,6 +29,8 @@ To get a local copy up and running follow these simple example steps.
 
 * Run `https://github.com/mohammadumar28/react-capstone.git` to clone the project
 * Go to the cloned directory
+* Create a `.env` file
+* See the `.env.example` to fill out your TMDB API key
 * Run `npm install` to install node modules
 * Run `npm start` to start the app
 
