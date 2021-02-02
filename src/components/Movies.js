@@ -8,7 +8,7 @@ const Movies = ({ error, loading, movies }) => {
   }
 
   if (loading) {
-    return <div>Loading</div>;
+    return <div className="loading">Loading</div>;
   }
 
   if (movies) {

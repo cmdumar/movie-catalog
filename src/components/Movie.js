@@ -16,7 +16,7 @@ const Movie = ({
   }
 
   if (loading) {
-    return <div className={styles.loading}>Loading</div>;
+    return <div className="loading">Loading</div>;
   }
 
   if (movie) {
