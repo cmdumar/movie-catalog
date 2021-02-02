@@ -13,7 +13,7 @@ const Movies = ({ error, loading, movies }) => {
 
   if (movies) {
     return (
-      <div className={styles.movie_grid}>
+      <div className={styles['movies-grid']}>
         {movies.map(movie => (
           <div
             className={`${styles['movie-item']} ${styles['infos-container']}`}
