@@ -1,22 +1,45 @@
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
+import fetchMoviesByCategory from '../actions/index';
 import Home from './Home';
 import Movie from './Movie';
 
-function App() {
-  const movies = useSelector(state => state.movies.items);
+const App = ({
+  dispatch, movies, loading, error,
+}) => {
+  const [page, setPage] = useState(1);
+  const moviesById = useSelector(state => state.movies.items);
+
+  useEffect(() => {
+    dispatch(fetchMoviesByCategory('popular', page));
+  }, [page]);
+
+  const changePage = e => {
+    setPage(e);
+  };
+
   return (
     <>
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/">
+          <Home
+            movies={movies}
+            loading={loading}
+            error={error}
+            changePage={changePage}
+            page={page}
+          />
+        </Route>
       </Switch>
 
       {/* Routes for Movies */}
-      {movies.results
+      {moviesById.results
         ? (
           <Switch>
             {
-            movies.results.map(i => (
+            moviesById.results.map(i => (
               <Route key={i.id} path={`/movie/${i.id}`}>
                 <Movie id={i.id} />
               </Route>
@@ -26,6 +49,25 @@ function App() {
         ) : null}
     </>
   );
-}
+};
 
-export default App;
+const mapStateToProps = state => ({
+  movies: state.movies.items,
+  loading: state.movies.loading,
+  error: state.movies.error,
+});
+
+App.propTypes = {
+  error: PropTypes.string,
+  loading: PropTypes.bool,
+  movies: PropTypes.instanceOf(Object),
+  dispatch: PropTypes.func.isRequired,
+};
+
+App.defaultProps = {
+  error: null,
+  loading: false,
+  movies: null,
+};
+
+export default connect(mapStateToProps)(App);
