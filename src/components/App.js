@@ -25,6 +25,7 @@ const App = ({
 
   const handleSelect = e => {
     setCategory(e.target.value);
+    setPage(1);
   };
 
   return (
