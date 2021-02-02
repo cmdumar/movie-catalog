@@ -5,23 +5,38 @@ import { connect, useSelector } from 'react-redux';
 import fetchMoviesByCategory from '../actions/index';
 import Home from './Home';
 import Movie from './Movie';
+import 'rc-pagination/assets/index.css';
+import styles from './App.module.scss';
 
 const App = ({
   dispatch, movies, loading, error,
 }) => {
   const [page, setPage] = useState(1);
   const moviesById = useSelector(state => state.movies.items);
+  const [category, setCategory] = useState('popular');
 
   useEffect(() => {
-    dispatch(fetchMoviesByCategory('popular', page));
-  }, [page]);
+    dispatch(fetchMoviesByCategory(category, page));
+  }, [page, category]);
 
   const changePage = e => {
     setPage(e);
   };
 
+  const handleSelect = e => {
+    setCategory(e.target.value);
+  };
+
   return (
     <>
+      <nav>
+        <div className={styles.logo}>
+          <img
+            src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg"
+            alt="TMDB Logo"
+          />
+        </div>
+      </nav>
       <Switch>
         <Route exact path="/">
           <Home
@@ -30,6 +45,8 @@ const App = ({
             error={error}
             changePage={changePage}
             page={page}
+            handleSelect={handleSelect}
+            category={category}
           />
         </Route>
       </Switch>

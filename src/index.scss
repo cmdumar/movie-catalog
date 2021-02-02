@@ -19,6 +19,7 @@ body {
 body {
   font-family: 'Lato', sans-serif;
   color: #b7c7bd;
+  background-color: #101315;
   line-height: 1.2;
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
@@ -129,4 +130,62 @@ video {
 
 .relative {
   position: relative;
+}
+
+.paginator {
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+@media screen and (max-width: 500px) {
+  .paginator {
+    padding: 20px 10px;
+  }
+}
+
+.rc-pagination {
+  font-weight: bold;
+}
+
+.rc-pagination-item {
+  border-radius: 2px;
+}
+
+.rc-pagination-item-active {
+  background-color: #01d277;
+  border-color: #01d277;
+
+  a {
+    color: black;
+  }
+}
+
+.rc-pagination-prev a,
+.rc-pagination-next a {
+  color: #01d277;
+}
+
+.rc-pagination-item:hover,
+.rc-pagination-item:focus {
+  border-color: #01d277;
+  background-color: #01d277;
+  outline: 0;
+
+  a {
+    color: black;
+  }
+}
+
+.rc-pagination-prev,
+.rc-pagination-next,
+.rc-pagination-jump-prev,
+.rc-pagination-jump-next {
+  border-radius: 2px;
+  background-color: black;
+
+  &:focus {
+    outline: 0;
+  }
 }

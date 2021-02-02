@@ -16,7 +16,7 @@ const Movie = ({
   }
 
   if (loading) {
-    return <div>Loading</div>;
+    return <div className={styles.loading}>Loading</div>;
   }
 
   if (movie) {
@@ -39,10 +39,7 @@ const Movie = ({
               <span className={styles['movie-date']}>{movie.release_date}</span>
               <span className={styles['movie-vote']}>{movie.vote_average}</span>
               <span className={styles['movie-runtime']}>
-                {Math.floor(movie.runtime / 60)}
-                h
-                {movie.runtime % 60}
-                m
+                {`${Math.floor(movie.runtime / 60)} h ${movie.runtime % 60} m`}
               </span>
             </div>
             <div className={styles['movie-genres']}>
@@ -59,20 +56,6 @@ const Movie = ({
             </div>
 
             <div className={styles['movie-overview']}>{movie.overview}</div>
-            {/* <div className="movie-director">
-              <span className="director-job">Director</span>
-              <span className="director-name">{direcName}</span>
-            </div> */}
-            {/* <div>
-              <span className="main-cast">Main Cast</span>
-              {loaded ? credits.cast.map((cast, i) => ((i < 11)
-                ? (
-                  <span key={cast.cast_id}>
-                    {i !== 10 ? `${cast.name}, `
-                      : `${cast.name}`}
-                  </span>
-                ) : null)) : null}
-            </div> */}
           </div>
         </div>
       </div>
