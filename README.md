@@ -1,4 +1,4 @@
-# Bookstore CMS
+# React Movie DB
 
 > A Movie Catalog Web App made with React/Redux.
 
