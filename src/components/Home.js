@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import Pagination from 'rc-pagination';
 import Movies from './Movies';
 import Filter from './Filter';
 
 const Home = ({
-  movies, loading, error, changePage, page, handleSelect, category,
+  changePage, page, handleSelect, category, movies,
 }) => (
   <>
     <Filter handleSelect={handleSelect} category={category} />
-    <Movies movies={movies.results} loading={loading} error={error} />
+    <Movies />
     <div className="paginator">
       <Pagination
         pageSize={20}
@@ -21,15 +20,7 @@ const Home = ({
   </>
 );
 
-const mapStateToProps = state => ({
-  movies: state.movies.items,
-  loading: state.movies.loading,
-  error: state.movies.error,
-});
-
 Home.propTypes = {
-  error: PropTypes.string,
-  loading: PropTypes.bool,
   movies: PropTypes.instanceOf(Object),
   changePage: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
@@ -38,9 +29,7 @@ Home.propTypes = {
 };
 
 Home.defaultProps = {
-  error: null,
-  loading: false,
   movies: null,
 };
 
-export default connect(mapStateToProps, null)(Home);
+export default Home;

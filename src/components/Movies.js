@@ -1,8 +1,12 @@
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styles from './Movies.module.scss';
 
-const Movies = ({ error, loading, movies }) => {
+const getMovies = state => state.movies;
+
+const Movies = () => {
+  const { items: { results }, loading, error } = useSelector(getMovies);
+
   if (error) {
     return <div>{error}</div>;
   }
@@ -11,10 +15,10 @@ const Movies = ({ error, loading, movies }) => {
     return <div className="loading">Loading</div>;
   }
 
-  if (movies) {
+  if (results) {
     return (
       <div className={styles['movies-grid']}>
-        {movies.map(movie => (
+        {results.map(movie => (
           <div
             className={`${styles['movie-item']} ${styles['infos-container']}`}
             key={movie.id}
@@ -39,18 +43,6 @@ const Movies = ({ error, loading, movies }) => {
   }
 
   return <div>Found none</div>;
-};
-
-Movies.propTypes = {
-  error: PropTypes.string,
-  loading: PropTypes.bool,
-  movies: PropTypes.instanceOf(Array),
-};
-
-Movies.defaultProps = {
-  error: null,
-  loading: false,
-  movies: null,
 };
 
 export default Movies;

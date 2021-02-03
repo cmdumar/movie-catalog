@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import fetchMoviesByCategory from '../actions/index';
-import Home from './Home';
+import Home from '../components/Home';
 import Movie from './Movie';
 import 'rc-pagination/assets/index.css';
 import styles from './App.module.scss';
 
 const App = ({
-  dispatch, movies, loading, error,
+  dispatch, movies,
 }) => {
   const [page, setPage] = useState(1);
-  const moviesById = useSelector(state => state.movies.items);
   const [category, setCategory] = useState('popular');
 
   useEffect(() => {
@@ -42,8 +41,6 @@ const App = ({
         <Route exact path="/">
           <Home
             movies={movies}
-            loading={loading}
-            error={error}
             changePage={changePage}
             page={page}
             handleSelect={handleSelect}
@@ -53,11 +50,11 @@ const App = ({
       </Switch>
 
       {/* Routes for Movies */}
-      {moviesById.results
+      {movies.results
         ? (
           <Switch>
             {
-            moviesById.results.map(i => (
+            movies.results.map(i => (
               <Route key={i.id} path={`/movie/${i.id}`}>
                 <Movie id={i.id} />
               </Route>
@@ -71,20 +68,14 @@ const App = ({
 
 const mapStateToProps = state => ({
   movies: state.movies.items,
-  loading: state.movies.loading,
-  error: state.movies.error,
 });
 
 App.propTypes = {
-  error: PropTypes.string,
-  loading: PropTypes.bool,
   movies: PropTypes.instanceOf(Object),
   dispatch: PropTypes.func.isRequired,
 };
 
 App.defaultProps = {
-  error: null,
-  loading: false,
   movies: null,
 };
 
