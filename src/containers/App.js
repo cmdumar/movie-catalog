@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import fetchMoviesByCategory from '../actions/index';
 import Home from '../components/Home';
 import Movie from './Movie';
@@ -9,8 +9,9 @@ import 'rc-pagination/assets/index.css';
 import styles from './App.module.scss';
 
 const App = ({
-  dispatch, movies,
+  movies,
 }) => {
+  const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState('popular');
 
@@ -72,7 +73,6 @@ const mapStateToProps = state => ({
 
 App.propTypes = {
   movies: PropTypes.instanceOf(Object),
-  dispatch: PropTypes.func.isRequired,
 };
 
 App.defaultProps = {

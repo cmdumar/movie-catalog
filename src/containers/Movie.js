@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import fetchMovieById from '../actions/movieActions';
 import styles from './Movie.module.scss';
 
 const Movie = ({
-  dispatch, id, movie, loading, error,
+  id, movie, loading, error,
 }) => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchMovieById(id));
   }, []);
@@ -70,7 +72,6 @@ Movie.propTypes = {
   error: PropTypes.string,
   loading: PropTypes.bool,
   movie: PropTypes.instanceOf(Object),
-  dispatch: PropTypes.func.isRequired,
 };
 
 Movie.defaultProps = {
