@@ -6,7 +6,7 @@ const initialState = {
   error: null,
 };
 
-const moviesReducer = (state = initialState, action) => {
+const movieReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_MOVIE_BEGIN:
       return {
@@ -32,4 +32,4 @@ const moviesReducer = (state = initialState, action) => {
   }
 };
 
-export default moviesReducer;
+export default movieReducer;

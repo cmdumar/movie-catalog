@@ -21,8 +21,8 @@ const fetchMoviesError = error => ({
 const fetchMoviesByCategory = (category, page) => dispatch => {
   dispatch(fetchMoviesBegin());
   return getMoviesByCategory(category, page)
-    .then(res => {
-      dispatch(fetchMoviesSuccess(res.data));
+    .then(async res => {
+      await dispatch(fetchMoviesSuccess(res.data));
       return res.data;
     })
     .catch(err => dispatch(fetchMoviesError(err)));
