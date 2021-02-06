@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Filter Component 1`] = `
+<div
+  className="filter"
+>
+  <h3>
+    Choose Category:
+  </h3>
+  <select
+    onChange={[Function]}
+    value="popular"
+  >
+    <option
+      value="popular"
+    >
+      Popular
+    </option>
+    <option
+      value="now_playing"
+    >
+      Now Playing
+    </option>
+    <option
+      value="top_rated"
+    >
+      Top Rated
+    </option>
+    <option
+      value="upcoming"
+    >
+      Upcoming
+    </option>
+  </select>
+</div>
+`;
